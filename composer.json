@@ -1,0 +1,16 @@
+{
+    "name": "muxailk/algorithms-and-data-structures",
+    "autoload": {
+        "psr-4": {
+            "Structures\\": "Structures/",
+            "Algorithms\\": "Algorithms/"
+        }
+    },
+    "authors": [
+        {
+            "name": "muxailk",
+            "email": "muxail1327@mail.ru"
+        }
+    ],
+    "require": {}
+}
