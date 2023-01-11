@@ -13,7 +13,8 @@ interface ILinkedList
     public function get(int $position): ?LinkedListNode;
     public function getFirst(): ?LinkedListNode;
     public function getLast(): ?LinkedListNode;
-
+    public function getLength(): int;
+    
     public function remove(int $position): void;
     public function clear(): void;
 }

@@ -37,7 +37,7 @@ class SinglyLinkedList implements ILinkedList
                 $current = $current->next;
             }
 
-            $current->next = new LinkedListNode($value);                    
+            $current->next = new LinkedListNode($value);
         }
 
         return ++$this->length;
@@ -73,26 +73,36 @@ class SinglyLinkedList implements ILinkedList
         return $current;
     }
 
-    public function getFirst(): ?LinkedListNode 
+    public function getFirst(): ?LinkedListNode
     {
-        return $this->head;
+        return $this->head ?? null;
     }
 
     public function getLast(): ?LinkedListNode
     {
-        $current = $this->head;
+        $current = $this->head ?? null;
 
-        for ($i = 0; $i < $this->length; $i++) {
+        for ($i = 0; $i < $this->length - 1; $i++) {
             $current = $current->next;
         }
 
         return $current;
     }
 
+    public function getLength(): int
+    {
+        return $this->length;
+    }
+
     public function remove(int $position): void
     {
         if ($position < 0 || $position >= $this->length) {
             throw new OutOfRangeException;
+        }
+
+        if (!$position) {
+            $this->head = $this->head->next;
+            return;
         }
 
         $current = $this->head;
@@ -104,7 +114,11 @@ class SinglyLinkedList implements ILinkedList
         $current->next = $current->next->next;
     }
 
-    public function clear(): void {
-        unset($this->head);
+    public function clear(): void
+    {
+        if (! is_null($this->head)) {
+            unset($this->head);
+            $this->length = 0;
+        }
     }
 }
