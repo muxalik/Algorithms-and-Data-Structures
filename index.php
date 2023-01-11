@@ -6,9 +6,8 @@ use Structures\SinglyLinkedList;
 
 $list = new SinglyLinkedList();
 
-$list->addLast(1);
-$list->addFirst(-20);
-$list->addLast(132);
-$list->remove(1);
-
+$list->addLast('1');
+$list->addLast('2');
+$length = $list->addLast('3');
+print_r($list->getLast());
 print_r($list);
