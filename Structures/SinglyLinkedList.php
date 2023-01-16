@@ -2,13 +2,13 @@
 
 namespace Structures;
 
-use Structures\Support\LinkedListNode;
+use Structures\Support\LinkedList\SinglyLinkedListNode;
 use OutOfRangeException;
-use Structures\Interfaces\ILinkedList;
+use Structures\Interfaces\ISinglyLinkedList;
 
-class SinglyLinkedList implements ILinkedList
+class SinglyLinkedList implements ISinglyLinkedList
 {
-    protected ?LinkedListNode $head;
+    protected ?SinglyLinkedListNode $head;
     protected int $length;
 
     public function __construct()
@@ -20,7 +20,7 @@ class SinglyLinkedList implements ILinkedList
     public function addFirst(mixed $value): int
     {
         $head = $this->head;
-        $this->head = new LinkedListNode($value);
+        $this->head = new SinglyLinkedListNode($value);
         $this->head->next = $head;
 
         return ++$this->length;
@@ -31,13 +31,13 @@ class SinglyLinkedList implements ILinkedList
         $current = $this->head;
 
         if (is_null($current)) {
-            $this->head = new LinkedListNode($value);
+            $this->head = new SinglyLinkedListNode($value);
         } else {
             while ($current->next !== null) {
                 $current = $current->next;
             }
 
-            $current->next = new LinkedListNode($value);
+            $current->next = new SinglyLinkedListNode($value);
         }
 
         return ++$this->length;
@@ -58,7 +58,7 @@ class SinglyLinkedList implements ILinkedList
         $current->value = $value;
     }
 
-    public function get(int $position): ?LinkedListNode
+    public function get(int $position): ?SinglyLinkedListNode
     {
         if ($position < 0 || $position >= $this->length) {
             throw new OutOfRangeException;
@@ -73,12 +73,12 @@ class SinglyLinkedList implements ILinkedList
         return $current;
     }
 
-    public function getFirst(): ?LinkedListNode
+    public function getFirst(): ?SinglyLinkedListNode
     {
         return $this->head ?? null;
     }
 
-    public function getLast(): ?LinkedListNode
+    public function getLast(): ?SinglyLinkedListNode
     {
         $current = $this->head ?? null;
 
