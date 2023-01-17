@@ -1,21 +1,15 @@
 <?php
 
-namespace Structures;
+namespace Structures\LinkedList;
 
-use Structures\Support\LinkedList\SinglyLinkedListNode;
 use OutOfRangeException;
-use Structures\Interfaces\ISinglyLinkedList;
+use Structures\Support\LinkedList\SinglyLinkedListNode;
+use Structures\Interfaces\LinkedList\ISinglyLinkedList;
 
 class SinglyLinkedList implements ISinglyLinkedList
 {
-    protected ?SinglyLinkedListNode $head;
-    protected int $length;
-
-    public function __construct()
-    {
-        $this->head = null;
-        $this->length = 0;
-    }
+    protected ?SinglyLinkedListNode $head = null;
+    protected int $length = 0;
 
     public function addFirst(mixed $value): int
     {

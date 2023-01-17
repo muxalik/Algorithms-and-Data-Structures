@@ -2,13 +2,13 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Structures\SinglyLinkedList;
+use Structures\LinkedList\DoublyLinkedList;
 
-$list = new SinglyLinkedList();
 
-$list->addLast(1);
-$list->addFirst(-20);
-$list->addLast(132);
-$list->remove(1);
+$list = new DoublyLinkedList();
+$list->addFirst(12);
+$list->addFirst(654);
+$list->addFirst(4);
+$list->clear();
 
 print_r($list);
