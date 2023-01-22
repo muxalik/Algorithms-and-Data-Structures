@@ -4,11 +4,12 @@ require __DIR__ . '/vendor/autoload.php';
 
 use Structures\LinkedList\DoublyLinkedList;
 
-
 $list = new DoublyLinkedList();
 $list->addFirst(12);
-$list->addFirst(654);
-$list->addFirst(4);
-$list->clear();
+$list->addLast(11);
+$list->addLast(853);
+$list->addLast(154);
+$list->addLast(64);
+$list->addLast(43);
 
-print_r($list);
+print_r($list->getFirst());
