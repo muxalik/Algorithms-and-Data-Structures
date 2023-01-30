@@ -1,17 +1,19 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+use Structures\LinkedList\DoublyLinkedList;
+
 require_once 'vendor/autoload.php';
 
-use PHPUnit\Framework\TestCase;
-use Structures\LinkedList\SinglyLinkedList;
-
-class SinglyLinkedListTest extends TestCase
+class DoublyLinkedListTest extends TestCase
 {
-    protected SinglyLinkedList $list;
+    protected DoublyLinkedList $list;
 
-    protected function setUp(): void
+    public function setUp(): void
     {
-        $this->list = new SinglyLinkedList();
+        parent::setUp();
+
+        $this->list = new DoublyLinkedList();
     }
 
     protected function fillList()
@@ -21,19 +23,19 @@ class SinglyLinkedListTest extends TestCase
         $this->list->addLast('3');
     }
 
-    /** @test */
-    public function add_element_to_the_start()
+    public function add_elements_to_start()
     {
-        $this->list->addFirst('1');
-        $this->list->addFirst('2');
-        $length = $this->list->addFirst('3');
+        $this->list->addFirst(3);
+        $this->list->addFirst(2);
+        $length = $this->list->addFirst(1);
 
         $this->assertEquals(3, $length);
         $this->assertEquals('3', $this->list->getFirst()->value);
     }
 
+
     /** @test */
-    public function add_element_to_the_end()
+    public function add_elements_to_the_end()
     {
         $this->fillList();
 
@@ -92,9 +94,7 @@ class SinglyLinkedListTest extends TestCase
     /** @test */
     public function get_first_element_if_list_is_empty()
     {
-        $list = new SinglyLinkedList();
-
-        $this->assertNull($list->getFirst());
+        $this->assertNull($this->list->getFirst());
     }
 
     /** @test */
@@ -108,9 +108,7 @@ class SinglyLinkedListTest extends TestCase
     /** @test */
     public function get_last_element_if_list_is_empty()
     {
-        $list = new SinglyLinkedList();
-
-        $this->assertNull($list->getLast());
+        $this->assertNull($this->list->getLast());
     }
 
     /** @test */
@@ -124,9 +122,7 @@ class SinglyLinkedListTest extends TestCase
     /** @test */
     public function get_length_if_list_is_empty()
     {
-        $list = new SinglyLinkedList();
-
-        $this->assertEquals(0, $list->getLength());
+        $this->assertEquals(0, $this->list->getLength());
     }
 
     /** @test */
@@ -169,11 +165,10 @@ class SinglyLinkedListTest extends TestCase
     /** @test */
     public function clear_if_list_is_empty()
     {
-        $list = new SinglyLinkedList();
+        $this->list->clear();
 
-        $list->clear();
-
-        $this->assertNull($list->getFirst());
+        $this->assertNull($this->list->getFirst());
+        $this->assertEquals(0, $this->list->getLength());
     }
 
     /** @test */

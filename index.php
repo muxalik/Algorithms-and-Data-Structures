@@ -8,8 +8,6 @@ $list = new DoublyLinkedList();
 $list->addFirst(12);
 $list->addLast(11);
 $list->addLast(853);
-$list->addLast(154);
-$list->addLast(64);
-$list->addLast(43);
+$list->remove(1);
 
-print_r($list->getFirst());
+print_r($list);

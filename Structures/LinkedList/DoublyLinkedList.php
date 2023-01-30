@@ -10,7 +10,20 @@ class DoublyLinkedList implements IDoublyLinkedList
 {
     protected ?DoublyLinkedListNode $head = null;
     protected int $length = 0;
-    
+        
+    /**
+     * validatePosition
+     *
+     * @param  int $position
+     * @return void
+     */
+    protected function validatePosition(int $position): void 
+    {
+        if ($position < 0 || $position >= $this->length) {
+            throw new OutOfRangeException;
+        }
+    }
+
     /**
      * Get length
      *
@@ -29,6 +42,8 @@ class DoublyLinkedList implements IDoublyLinkedList
      */
     public function get(int $position): ?DoublyLinkedListNode
     {
+        $this->validatePosition($position);
+
         $current = $this->head;
 
         for ($i = 0; $i < $position; $i++) {
@@ -56,7 +71,7 @@ class DoublyLinkedList implements IDoublyLinkedList
     {
         $current = $this->head;
 
-        while ($current->next) {
+        while ($current && $current->next) {
             $current = $current->next;
         }
 
@@ -117,16 +132,9 @@ class DoublyLinkedList implements IDoublyLinkedList
      */
     public function set(int $position, mixed $value): void
     {
-        if ($position < 0 || $position >= $this->length) {
-            throw new OutOfRangeException;
-        }
+        $this->validatePosition($position);
 
-        $current = $this->head;
-
-        for ($i = 0; $i < $position; $i++) {
-            $current = $current->next;
-        }
-
+        $current = $this->get($position);
         $current->value = $value;
     }
 
@@ -138,24 +146,36 @@ class DoublyLinkedList implements IDoublyLinkedList
      */
     public function remove(int $position): void
     {
-        if ($position < 0 || $position >= $this->length) {
-            throw new OutOfRangeException;
-        }
+        $this->validatePosition($position);
 
         $current = $this->head;
 
-        for ($i = 0; $i < $position - 1; $i++) {
-            $current = $current->next;
+        if ($position === 0) {
+            $next = $current->next;
+            unset($current);
+            $next->prev = null;
+            $this->head = $next;
+            $this->length--;
+
+            return;
         }
 
-        $prev = $current;
-        $current = $current->next;
+        if ($position === $this->length - 1) {
+            $prev = $this->get($position - 1);
+            unset($prev->next);
+            $this->length--;
+
+            return;
+        }
+
+        $current = $this->get($position);
+        $prev = $current->prev;
         $next = $current->next;
 
         unset($current);
 
-        $prev->next = $next;
         $next->prev = $prev;
+        $prev->next = $next;
 
         $this->length--;
     }
